@@ -5,6 +5,7 @@
 (setq indent-tabs-mode nil)
 (setq c-default-style "k&r")
 
+(setq ediff-split-window-function 'split-window-horizontally)
 
 (require 'ido)
 (ido-mode t)
