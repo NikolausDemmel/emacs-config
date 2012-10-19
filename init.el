@@ -5,9 +5,15 @@
 (setq indent-tabs-mode nil)
 (setq c-default-style "k&r")
 
+
+(require 'ido)
+(ido-mode t)
+
+
 ;; Load the library and start it up
 (require 'rosemacs)
 (invoke-rosemacs)
+(setq ros-completion-function 'ido-completing-read)
 
 ;; Optional but highly recommended: add a prefix for quick access
 ;; to the rosemacs commands
@@ -30,3 +36,18 @@
 (defun gitg ()
   (interactive)
   (shell-command "gitg"))
+
+
+
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(ido-enable-flex-matching t))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
