@@ -1,6 +1,9 @@
 
 
+(column-number-mode)
+
 (setq-default tab-width 4)
+(setq require-final-newline t)
 (setq c-basic-offset 4)
 (setq indent-tabs-mode nil)
 (setq c-default-style "k&r")
@@ -36,7 +39,7 @@
 
 (defun gitg ()
   (interactive)
-  (shell-command "gitg"))
+  (start-process "gitg" "*gitg*" "gitg"))
 
 
 
