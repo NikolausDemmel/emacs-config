@@ -31,6 +31,8 @@
 (global-set-key [f9] 'recompile)
 (global-set-key [f10] 'compile)
 
+(global-set-key (kbd "C-x C-;") 'comment-or-uncomment-region)
+
 
 
 (require 'magit-svn)
