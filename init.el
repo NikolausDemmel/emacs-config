@@ -1,4 +1,10 @@
 
+;;; INSTALL
+
+;; Install the following ubuntu packages:
+;; sudo apt-get install ttf-droid magit emacs
+
+
 
 (column-number-mode)
 
