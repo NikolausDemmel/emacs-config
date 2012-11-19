@@ -41,6 +41,7 @@
 
 
 
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/magit"))
 (require 'magit-svn)
 (global-set-key (kbd "C-x g") 'magit-status)
 
