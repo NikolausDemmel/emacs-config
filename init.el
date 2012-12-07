@@ -36,6 +36,7 @@
 
 (global-set-key [f9] 'recompile)
 (global-set-key [f10] 'compile)
+(global-set-key [f5] 'revert-buffer)
 
 (global-set-key (kbd "C-x C-;") 'comment-or-uncomment-region)
 
@@ -73,3 +74,16 @@
      (set-face-foreground 'magit-diff-del "red3")
      (when (not window-system)
        (set-face-background 'magit-item-highlight "black"))))
+
+
+
+;; dired
+(setq dired-dwim-target t) ;; suggest copying/moving to other dired buffer in split view
+
+
+
+;; literature
+(load "~/work/literature/scripts/lit.el")
+
+
+
