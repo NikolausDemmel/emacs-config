@@ -83,7 +83,15 @@
 
 
 ;; literature
-(load "~/work/literature/scripts/lit.el")
+(let ((file "~/work/literature/scripts/lit.el"))
+  (if (file-exists-p file)
+	  (load file)))
 
 
+
+;; emacs backup files all in one place
+(setq backup-directory-alist `(("." . "~/.emacs.d/saves")))
+
+;; safe (but slow) backup files
+(setq backup-by-copying t)
 
