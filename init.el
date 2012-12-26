@@ -81,7 +81,7 @@
 (setq dired-dwim-target t) ;; suggest copying/moving to other dired buffer in split view
 
 
-
+(require 'dired)
 ;; literature
 (let ((file "~/work/literature/scripts/lit.el"))
   (if (file-exists-p file)
@@ -95,3 +95,21 @@
 ;; safe (but slow) backup files
 (setq backup-by-copying t)
 
+
+
+;;;; gnome open
+
+;; source: (2012.12.25) http://psung.blogspot.com/2007/05/bridging-gap-between-emacs-and-gnome.html
+
+(defun gnome-open-file (filename)
+  "gnome-opens the specified file."
+  (interactive "fFile to open: ")
+  (let ((process-connection-type nil))
+    (start-process "" nil "/usr/bin/gnome-open" filename)))
+
+(defun dired-gnome-open-file ()
+  "Opens the current file in a Dired buffer."
+  (interactive)
+  (gnome-open-file (dired-get-file-for-visit)))
+
+(add-hook 'dired-mode-hook (lambda () (local-set-key "E" 'dired-gnome-open-file)))
