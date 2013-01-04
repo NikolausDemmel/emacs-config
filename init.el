@@ -40,6 +40,8 @@
 
 (global-set-key (kbd "C-x C-;") 'comment-or-uncomment-region)
 
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
+
 
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/magit"))
