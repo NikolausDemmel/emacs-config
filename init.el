@@ -47,10 +47,22 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 
+;; change magit diff colors
+(eval-after-load 'magit
+  '(progn
+     (set-face-foreground 'magit-diff-add "green3")
+     (set-face-foreground 'magit-diff-del "red3")
+     (when (not window-system)
+       (set-face-background 'magit-item-highlight "black"))))
+
+
+
 (defun gitg ()
   (interactive)
   (start-process "gitg" "*gitg*" "gitg"))
 
+
+(setq-default fill-column 80)
 
 
 (custom-set-variables
@@ -67,21 +79,19 @@
  )
 
 
-;; change magit diff colors
-(eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "green3")
-     (set-face-foreground 'magit-diff-del "red3")
-     (when (not window-system)
-       (set-face-background 'magit-item-highlight "black"))))
-
-
 
 ;; dired
+
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/dired-plus"))
+(require 'dired)
+(require 'dired-aux)
+(require 'dired-x)
+(require 'dired+)
+
+
 (setq dired-dwim-target t) ;; suggest copying/moving to other dired buffer in split view
 
-
-(require 'dired)
 ;; literature
 (let ((file "~/work/literature/scripts/lit.el"))
   (if (file-exists-p file)
@@ -113,3 +123,30 @@
   (gnome-open-file (dired-get-file-for-visit)))
 
 (add-hook 'dired-mode-hook (lambda () (local-set-key "E" 'dired-gnome-open-file)))
+
+
+
+;;; ORG mode
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/org-mode/lisp"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/org-mode/contrib/lisp"))
+
+(eval-after-load "org"
+  '(progn
+     ;; Change .pdf association directly within the alist
+	 (setcdr (assoc "\\.pdf\\'" org-file-apps) "evince %s")))
+
+
+
+;;; Doc View
+(setq doc-view-continuous t)
+
+
+
+;;; flyspell
+
+(dolist (hook '(text-mode-hook org-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+(dolist (hook '(change-log-mode-hook log-edit-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode -1))))
+(dolist (hook '(c++-mode-hook))
+  (add-hook hook (lambda () (flyspell-prog-mode 1))))
