@@ -10,3 +10,6 @@
 [submodule "site-lisp/org-mode"]
 	path = site-lisp/org-mode
 	url = http://orgmode.org/org-mode.git
+[submodule "site-lisp/symbols-mode-el"]
+	path = site-lisp/symbols-mode-el
+	url = https://git.gitorious.org/symbols-mode-el/symbols-mode-el.git
