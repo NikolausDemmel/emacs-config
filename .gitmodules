@@ -13,3 +13,6 @@
 [submodule "site-lisp/symbols-mode-el"]
 	path = site-lisp/symbols-mode-el
 	url = https://git.gitorious.org/symbols-mode-el/symbols-mode-el.git
+[submodule "site-lisp/rosemacs"]
+	path = site-lisp/rosemacs
+	url = https://kforge.ros.org/rosemacs/git
