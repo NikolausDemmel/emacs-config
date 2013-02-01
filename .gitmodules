@@ -16,3 +16,6 @@
 [submodule "site-lisp/rosemacs"]
 	path = site-lisp/rosemacs
 	url = https://kforge.ros.org/rosemacs/git
+[submodule "site-lisp/auto-complete"]
+	path = site-lisp/auto-complete
+	url = https://github.com/auto-complete/auto-complete.git
