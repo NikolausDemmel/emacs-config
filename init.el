@@ -20,7 +20,23 @@
 (ido-mode t)
 
 
+;;; Python 
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/python.el"))
+(require 'python)
+
+;;; Autocomplete
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/auto-complete"))
+
+(pymacs-load "ropemacs" "rope-")
+(setq ropemacs-enable-autoimport t)
+
+(require 'auto-complete)
+(global-auto-complete-mode t)
+
+
+
 ;; Load the library and start it up
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/rosemacs"))
 (require 'rosemacs)
 (invoke-rosemacs)
 (setq ros-completion-function 'ido-completing-read)
@@ -46,6 +62,7 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/magit"))
 (require 'magit-svn)
+(add-hook 'magit-mode-hook 'turn-on-magit-svn)
 (global-set-key (kbd "C-x g") 'magit-status)
 
 
@@ -152,3 +169,26 @@
   (add-hook hook (lambda () (flyspell-mode -1))))
 (dolist (hook '(c++-mode-hook))
   (add-hook hook (lambda () (flyspell-prog-mode 1))))
+
+
+
+;;; symbols-mode (only emacs24 out of the box?)
+;(require 'tabulated-list)
+;(require 'symbols-mode)
+;(require 'list-symbols)
+
+
+
+;;; Scons files
+(add-to-list 'auto-mode-alist '("\\.sco$" . python-mode))
+
+
+
+
+;;; COMPILATION MODE
+
+;; auto scroll in compilation buffer
+(setq compilation-scroll-output t)
+;; jump to first error
+;;(setq compilation-auto-jump-to-first-error t)
+
