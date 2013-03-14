@@ -6,12 +6,11 @@
 
 
 
-(column-number-mode)
 
 (setq-default tab-width 4)
 (setq require-final-newline t)
 (setq c-basic-offset 4)
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil) ;;(setq indent-tabs-mode nil)
 (setq c-default-style "k&r")
 
 (setq ediff-split-window-function 'split-window-horizontally)
@@ -192,3 +191,25 @@
 ;; jump to first error
 ;;(setq compilation-auto-jump-to-first-error t)
 
+
+
+
+;;; LATEX
+
+ ;; Math mode for LaTex
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+
+;; mouse scrolling
+(mouse-wheel-mode t)
+ 
+;; spellcheck in LaTex mode
+(add-hook `latex-mode-hook `flyspell-mode)
+(add-hook `tex-mode-hook `flyspell-mode)
+(add-hook `bibtex-mode-hook `flyspell-mode)
+ 
+;; Show line-number and column-number in the mode line
+(line-number-mode 1)
+(column-number-mode 1)
+ 
+;; highlight current line
+(global-hl-line-mode 1)
