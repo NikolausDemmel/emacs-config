@@ -1,0 +1,5 @@
+APTITUDE PACKAGES (list is not yet exhausitve):
+
+sudo apt-get install pymacs python-ropemacs
+
+TODO: provide make file to compile source packages included as submodules.
