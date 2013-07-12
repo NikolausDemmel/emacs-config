@@ -1,5 +1,15 @@
-APTITUDE PACKAGES (list is not yet exhausitve):
+1) APTITUDE PACKAGES (list is not yet exhausitve):
 
-sudo apt-get install pymacs python-ropemacs
+sudo apt-get install pymacs python-ropemacs fonts-droid
 
-TODO: provide make file to compile source packages included as submodules.
+
+2) Get Submodules
+
+git submodules init
+git submodules update
+
+
+3) Compile some packages
+
+cd site-lisp
+make
