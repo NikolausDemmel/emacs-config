@@ -213,3 +213,16 @@
  
 ;; highlight current line
 (global-hl-line-mode 1)
+
+
+
+;;; trim ws mode
+(require 'ws-trim)
+(dolist (hook '(c++-mode-hook
+                c-mode-hook
+                xml-mode-hook))
+  (add-hook hook (lambda () (ws-trim-mode 1))))
+
+
+;; Auto Modes by file ending
+(add-to-list 'auto-mode-alist '("\\.inl\\'" . c++-mode))
