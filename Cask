@@ -28,4 +28,5 @@
 (depends-on "yasnippet")
 (depends-on "dired+")
 (depends-on "auto-complete")
+(depends-on "cmake-font-lock")
 ;;(depends-on "org-mode")

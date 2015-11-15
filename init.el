@@ -328,5 +328,5 @@
 	   '(("\\.cmake\\'" . cmake-mode))
 	   auto-mode-alist))
 
-(autoload 'andersl-cmake-font-lock-activate "andersl-cmake-font-lock" nil t)
-(add-hook 'cmake-mode-hook 'andersl-cmake-font-lock-activate)
+(autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
+(add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
