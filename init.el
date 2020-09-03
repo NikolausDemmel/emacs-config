@@ -7,18 +7,45 @@
 
 ;;  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
 
-(require 'cask "/usr/local/opt/cask/cask.el")
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
+
+;;(require 'cask "/usr/local/opt/cask/cask.el")
 ;;(require 'cask "~/.emacs.d/.cask/cask.el")
-(cask-initialize)
-(require 'pallet)
+;;(cask-initialize)
+;;(require 'pallet)
 
 ;;(require 's)
 ;;(require 'f)
 ;;(require 'ht)
 ;;(require 'git)
 ;;(require 'ert)
-(require 'use-package)
+;;(require 'use-package)
 
+;; https://github.com/dimitri/el-get#basic-setup
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
+
+
+
+;; turn off bell
+(setq ring-bell-function 'ignore)
 
 
 
@@ -35,12 +62,14 @@
 (setq ediff-split-window-function 'split-window-horizontally)
 
 (require 'ido)
-(ido-mode t)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
 
 
 ;;; Python
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/python.el"))
-(require 'python)
+;(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/python.el"))
+;(require 'python)
 
 
 ;;(pymacs-load "ropemacs" "rope-")
@@ -52,14 +81,14 @@
 
 
 ;; Load the library and start it up
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/rosemacs"))
-(require 'rosemacs)
-(invoke-rosemacs)
-(setq ros-completion-function 'ido-completing-read)
+;(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/rosemacs"))
+;(require 'rosemacs)
+;(invoke-rosemacs)
+;(setq ros-completion-function 'ido-completing-read)
 
 ;; Optional but highly recommended: add a prefix for quick access
 ;; to the rosemacs commands
-(global-set-key "\C-x\C-r" ros-keymap)
+;(global-set-key "\C-x\C-r" ros-keymap)
 
 ;;(set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
 ;;(set-default-font "-unknown-Droid Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
@@ -72,7 +101,7 @@
 ;;(set-face-attribute 'default nil :font "Source Code Pro" :height 100)
 ;;(set-face-font 'default "Source Code Pro")
 
-(set-default-font "Source_Code_Pro-11")
+;(set-default-font "Source_Code_Pro-11")
 
 
 (setq confirm-kill-emacs 'yes-or-no-p)
@@ -83,33 +112,27 @@
 
 (global-set-key (kbd "C-x C-;") 'comment-or-uncomment-region)
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
+;(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
 
 
 
-(require 'magit-svn)
-(add-hook 'magit-mode-hook 'turn-on-magit-svn)
+;(require 'magit-svn)
+;(add-hook 'magit-mode-hook 'turn-on-magit-svn)
 (global-set-key (kbd "C-x g") 'magit-status)
+
 
 
 ;; change magit diff colors
 
-(custom-set-faces
+;(custom-set-faces
  ;; other faces
- '(magit-diff-added ((((type tty)) (:foreground "green"))))
- '(magit-diff-added-highlight ((((type tty)) (:foreground "LimeGreen"))))
- '(magit-diff-context-highlight ((((type tty)) (:foreground "default"))))
- '(magit-diff-file-heading ((((type tty)) nil)))
- '(magit-diff-removed ((((type tty)) (:foreground "red"))))
- '(magit-diff-removed-highlight ((((type tty)) (:foreground "IndianRed"))))
- '(magit-section-highlight ((((type tty)) nil))))
-
-;;(eval-after-load 'magit
-;;  '(progn
-;;     (set-face-foreground 'magit-diff-add "green3")
-;;     (set-face-foreground 'magit-diff-del "red3")
-;;     (when (not window-system)
-;;       (set-face-background 'magit-item-highlight "black"))))
+; '(magit-diff-added ((((type tty)) (:foreground "green"))))
+; '(magit-diff-added-highlight ((((type tty)) (:foreground "LimeGreen"))))
+; '(magit-diff-context-highlight ((((type tty)) (:foreground "default"))))
+; '(magit-diff-file-heading ((((type tty)) nil)))
+; '(magit-diff-removed ((((type tty)) (:foreground "red"))))
+; '(magit-diff-removed-highlight ((((type tty)) (:foreground "IndianRed"))))
+; '(magit-section-highlight ((((type tty)) nil))))
 
 
 
@@ -121,23 +144,8 @@
 
 
 
-(setq-default fill-column 80)
+;(setq-default fill-column 80)
 
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(TeX-view-program-list (quote (("open" "open %o"))))
- '(TeX-view-program-selection (quote (((output-dvi style-pstricks) "dvips and gv") (output-dvi "open") (output-pdf "open") (output-html "open"))))
- '(ido-enable-flex-matching t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 
 
@@ -149,11 +157,6 @@
 
 
 (setq dired-dwim-target t) ;; suggest copying/moving to other dired buffer in split view
-
-;; literature
-(let ((file "~/work/literature/scripts/lit.el"))
-  (if (file-exists-p file)
-	  (load file)))
 
 
 
@@ -168,65 +171,13 @@
 
 
 
-;;;; gnome open
 
-;; source: (2012.12.25) http://psung.blogspot.com/2007/05/bridging-gap-between-emacs-and-gnome.html
-
-(defun gnome-open-file (filename)
-  "gnome-opens the specified file."
-  (interactive "fFile to open: ")
-  (let ((process-connection-type nil))
-    (start-process "" nil "/usr/bin/gnome-open" filename)))
-
-(defun dired-gnome-open-file ()
-  "Opens the current file in a Dired buffer."
-  (interactive)
-  (gnome-open-file (dired-get-file-for-visit)))
-
-(add-hook 'dired-mode-hook (lambda () (local-set-key "E" 'dired-gnome-open-file)))
-
-
-
-;;; ORG mode
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/org-mode/lisp"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/org-mode/contrib/lisp"))
-
-(eval-after-load "org"
-  '(progn
-     ;; Change .pdf association directly within the alist
-	 (setcdr (assoc "\\.pdf\\'" org-file-apps) "evince %s")))
 
 
 
 ;;; Doc View
 (setq doc-view-continuous t)
 
-
-
-;;; ispell
-(setq ispell-dictionary "english")
-
-
-;;; flyspell
-
-(dolist (hook '(text-mode-hook org-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1))))
-(dolist (hook '(change-log-mode-hook log-edit-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode -1))))
-(dolist (hook '(c++-mode-hook))
-  (add-hook hook (lambda () (flyspell-prog-mode 1))))
-
-
-
-;;; symbols-mode (only emacs24 out of the box?)
-;(require 'tabulated-list)
-;(require 'symbols-mode)
-;(require 'list-symbols)
-
-
-
-;;; Scons files
-(add-to-list 'auto-mode-alist '("\\.sco$" . python-mode))
 
 
 
@@ -241,18 +192,8 @@
 
 
 
-;;; LATEX
-
- ;; Math mode for LaTex
-(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-
 ;; mouse scrolling
 (mouse-wheel-mode t)
-
-;; spellcheck in LaTex mode
-(add-hook `latex-mode-hook `flyspell-mode)
-(add-hook `tex-mode-hook `flyspell-mode)
-(add-hook `bibtex-mode-hook `flyspell-mode)
 
 ;; Show line-number and column-number in the mode line
 (line-number-mode 1)
@@ -263,35 +204,24 @@
 
 
 
-;;; trim ws mode
-(require 'ws-trim)
-(dolist (hook '(c++-mode-hook
-                c-mode-hook
-                xml-mode-hook))
-  (add-hook hook (lambda () (ws-trim-mode 1))))
-
-
-;; Auto Modes by file ending
-(add-to-list 'auto-mode-alist '("\\.inl\\'" . c++-mode))
-
 
 ;; not tool bar
 (tool-bar-mode -1)
 
 
+;;; I prefer cmd key for meta
+;(setq mac-option-key-is-meta nil
+;      mac-command-key-is-meta t
+;      mac-command-modifier 'meta
+;     mac-option-modifier 'super)
+
+(setq mac-option-key-is-meta t
+      mac-command-key-is-meta nil
+      mac-command-modifier 'command
+      mac-option-modifier 'meta)
 
 
 
-
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 
 
 
@@ -317,16 +247,16 @@
 
 ;; Handy key definition
 (define-key global-map "\C-\M-Q" 'unfill-region)
-
-
-
-
-;;; cmake Mode
-(setq auto-mode-alist
-	  (append
-	   '(("CMakeLists\\.txt\\'" . cmake-mode))
-	   '(("\\.cmake\\'" . cmake-mode))
-	   auto-mode-alist))
-
-(autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
-(add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(web-mode el-get auctex cmake-mode gh ghub ghub+ git-commit magit magit-gh-pulls magit-gitflow magit-lfs magit-popup magithub markdown-mode markdown-mode+)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
